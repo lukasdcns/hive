@@ -56,11 +56,11 @@ export function AddStreamForm({ existingChannels, existingYoutubeLabels, onAdd, 
               setError('')
             }}
             placeholder="Channel Twitch ou URL YouTube..."
-            className="bg-[#1f1f23] border border-[#3a3a3d] rounded px-3 py-1.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#9147ff] w-56"
+            className="bg-hive-input border border-hive-border rounded px-3 py-1.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-hive-accent w-56"
           />
           <button
             type="submit"
-            className="bg-[#9147ff] hover:bg-[#7d3de0] text-white text-sm font-medium px-4 py-1.5 rounded transition-colors"
+            className="bg-hive-accent hover:bg-hive-accent-hover text-hive-bg text-sm font-medium px-4 py-1.5 rounded transition-colors"
           >
             Ajouter
           </button>

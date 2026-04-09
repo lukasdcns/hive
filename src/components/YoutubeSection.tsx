@@ -15,7 +15,7 @@ function embedUrl(v: YoutubeVideo): string {
 export function YoutubeSection({ videos, onRemove }: Props) {
   return (
     <div
-      className="shrink-0 flex gap-1 px-1 py-1 bg-[#0e0e10] border-b border-[#3a3a3d] overflow-x-auto overflow-y-hidden"
+      className="shrink-0 flex gap-1 px-1 py-1 bg-hive-bg border-b border-hive-border overflow-x-auto overflow-y-hidden"
       style={{ height: '280px' }}
     >
       {videos.map((v) => (

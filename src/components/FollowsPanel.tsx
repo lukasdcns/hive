@@ -19,9 +19,9 @@ export function FollowsPanel({ activeChannels, onAdd, token, user, onLogin, onLo
   const { streams, loading, error, refresh } = useFollowedStreams(token, user?.id ?? null)
 
   return (
-    <div className="w-[220px] shrink-0 bg-[#18181b] border-r border-[#3a3a3d] flex flex-col overflow-hidden">
+    <div className="w-[220px] shrink-0 bg-hive-surface border-r border-hive-border flex flex-col overflow-hidden">
       {/* Header du panel */}
-      <div className="px-3 py-2 border-b border-[#3a3a3d]">
+      <div className="px-3 py-2 border-b border-hive-border">
         {user ? (
           <div className="flex items-center gap-2">
             <img
@@ -43,7 +43,7 @@ export function FollowsPanel({ activeChannels, onAdd, token, user, onLogin, onLo
         ) : (
           <button
             onClick={onLogin}
-            className="w-full bg-[#9147ff] hover:bg-[#7d3de0] text-white text-xs font-medium py-1.5 px-2 rounded transition-colors"
+            className="w-full bg-hive-accent hover:bg-hive-accent-hover text-hive-bg text-xs font-medium py-1.5 px-2 rounded transition-colors"
           >
             Se connecter avec Twitch
           </button>
@@ -111,8 +111,8 @@ export function FollowsPanel({ activeChannels, onAdd, token, user, onLogin, onLo
                       onClick={() => onAdd(stream.user_login)}
                       className={`w-full text-left px-3 py-2 flex flex-col gap-0.5 transition-colors ${
                         isActive
-                          ? 'bg-[#2a2a2d] cursor-default opacity-60'
-                          : 'hover:bg-[#2a2a2d] cursor-pointer'
+                          ? 'bg-hive-hover cursor-default opacity-60'
+                          : 'hover:bg-hive-hover cursor-pointer'
                       }`}
                     >
                       <div className="flex items-center gap-1.5">
@@ -121,7 +121,7 @@ export function FollowsPanel({ activeChannels, onAdd, token, user, onLogin, onLo
                           {stream.user_name}
                         </span>
                         {isActive && (
-                          <span className="text-[#9147ff] text-xs shrink-0">✓</span>
+                          <span className="text-hive-accent text-xs shrink-0">✓</span>
                         )}
                       </div>
                       <div className="text-gray-500 text-xs truncate pl-3">

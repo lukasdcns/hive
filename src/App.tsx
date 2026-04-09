@@ -100,29 +100,29 @@ export default function App() {
   return (
     <div className="flex flex-col h-screen">
       {/* Header */}
-      <header className="flex items-center gap-3 px-4 py-2 bg-[#18181b] border-b border-[#3a3a3d] shrink-0">
-        <h1 className="text-[#9147ff] font-bold text-lg tracking-tight">Hive</h1>
+      <header className="flex items-center gap-3 px-4 py-2 bg-hive-surface border-b border-hive-border shrink-0">
+        <h1 className="text-hive-accent font-bold text-lg tracking-tight">Hive</h1>
 
         <div className="flex-1" />
 
         {showLayoutToggle && (
-          <div className="flex rounded overflow-hidden border border-[#3a3a3d] text-sm">
+          <div className="flex rounded overflow-hidden border border-hive-border text-sm">
             <button
               onClick={() => setLayout('grid')}
               className={`px-3 py-1.5 font-medium transition-colors ${
                 layout === 'grid'
-                  ? 'bg-[#9147ff] text-white'
-                  : 'bg-[#1f1f23] text-gray-400 hover:text-white'
+                  ? 'bg-hive-accent text-hive-bg'
+                  : 'bg-hive-input text-gray-400 hover:text-white'
               }`}
             >
               Grille
             </button>
             <button
               onClick={handleSwitchToTheater}
-              className={`px-3 py-1.5 font-medium transition-colors border-l border-[#3a3a3d] ${
+              className={`px-3 py-1.5 font-medium transition-colors border-l border-hive-border ${
                 layout === 'theater'
-                  ? 'bg-[#9147ff] text-white'
-                  : 'bg-[#1f1f23] text-gray-400 hover:text-white'
+                  ? 'bg-hive-accent text-hive-bg'
+                  : 'bg-hive-input text-gray-400 hover:text-white'
               }`}
             >
               Théâtre
@@ -142,8 +142,8 @@ export default function App() {
           disabled={streams.length === 0}
           className={`px-3 py-1.5 text-sm rounded font-medium transition-colors ${
             chatOpen
-              ? 'bg-[#9147ff] text-white'
-              : 'bg-[#1f1f23] text-gray-300 hover:bg-[#2a2a2d] disabled:opacity-40 disabled:cursor-not-allowed'
+              ? 'bg-hive-accent text-hive-bg'
+              : 'bg-hive-input text-gray-300 hover:bg-hive-hover disabled:opacity-40 disabled:cursor-not-allowed'
           }`}
         >
           Chat

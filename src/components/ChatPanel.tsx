@@ -32,16 +32,16 @@ export function ChatPanel({ streams, activeChannel, onSelectChannel }: Props) {
 
   if (streams.length === 0) {
     return (
-      <div className="w-[350px] bg-[#1f1f23] border-l border-[#3a3a3d] flex items-center justify-center text-gray-500 text-sm">
+      <div className="w-[350px] bg-hive-input border-l border-hive-border flex items-center justify-center text-gray-500 text-sm">
         Aucun stream actif
       </div>
     )
   }
 
   return (
-    <div className="w-[350px] bg-[#1f1f23] border-l border-[#3a3a3d] flex flex-col">
+    <div className="w-[350px] bg-hive-input border-l border-hive-border flex flex-col">
       {/* Onglets + bouton connexion */}
-      <div className="flex items-center border-b border-[#3a3a3d] shrink-0">
+      <div className="flex items-center border-b border-hive-border shrink-0">
         <div className="flex overflow-x-auto flex-1">
           {streams.map((s) => (
             <button
@@ -49,7 +49,7 @@ export function ChatPanel({ streams, activeChannel, onSelectChannel }: Props) {
               onClick={() => onSelectChannel(s.channel)}
               className={`px-3 py-2 text-xs font-medium whitespace-nowrap transition-colors border-b-2 ${
                 s.channel === current
-                  ? 'border-[#9147ff] text-white'
+                  ? 'border-hive-accent text-white'
                   : 'border-transparent text-gray-400 hover:text-white'
               }`}
             >
@@ -60,7 +60,7 @@ export function ChatPanel({ streams, activeChannel, onSelectChannel }: Props) {
         {/* Bouton de connexion Twitch */}
         <button
           onClick={handleLogin}
-          className="shrink-0 mx-2 text-gray-500 hover:text-[#9147ff] transition-colors"
+          className="shrink-0 mx-2 text-gray-500 hover:text-hive-accent transition-colors"
           title="Se connecter au chat Twitch"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">

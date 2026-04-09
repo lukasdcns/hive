@@ -49,7 +49,7 @@ export function TheaterLayout({ streams, featuredId, onSetFeatured, onRemove }: 
       {/* Minis — 30% de la hauteur, rangée horizontale scrollable */}
       {minis.length > 0 && (
         <div
-          className="flex gap-1 px-1 py-1 bg-[#0e0e10] overflow-x-auto overflow-y-hidden"
+          className="flex gap-1 px-1 py-1 bg-hive-bg overflow-x-auto overflow-y-hidden"
           style={{ flex: '0 0 30%' }}
         >
           {minis.map((stream) => {
@@ -57,7 +57,7 @@ export function TheaterLayout({ streams, featuredId, onSetFeatured, onRemove }: 
             return (
               <div
                 key={stream.id}
-                className="relative shrink-0 rounded overflow-hidden group ring-2 ring-transparent hover:ring-[#9147ff] transition-all"
+                className="relative shrink-0 rounded overflow-hidden group ring-2 ring-transparent hover:ring-hive-accent transition-all"
                 style={{ aspectRatio: '16/9', height: '100%' }}
               >
                 {/* iframe interactive — l'utilisateur peut lancer/contrôler la lecture */}
@@ -71,7 +71,7 @@ export function TheaterLayout({ streams, featuredId, onSetFeatured, onRemove }: 
                 {/* Bouton "mettre en avant" — visible au hover, en haut à gauche */}
                 <button
                   onClick={() => onSetFeatured(stream.id)}
-                  className="absolute top-1 left-1 z-10 flex items-center gap-1 bg-black/70 hover:bg-[#9147ff] text-white text-xs px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="absolute top-1 left-1 z-10 flex items-center gap-1 bg-black/70 hover:bg-hive-accent hover:text-hive-bg text-white text-xs px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity"
                   title="Mettre en avant"
                 >
                   ↑ {stream.channel}
