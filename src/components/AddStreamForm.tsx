@@ -55,7 +55,7 @@ export function AddStreamForm({ existingChannels, existingYoutubeLabels, onAdd, 
               setValue(e.target.value)
               setError('')
             }}
-            placeholder="Channel Twitch ou URL YouTube..."
+            placeholder="Channel ou URL YouTube..."
             className="bg-hive-input border border-hive-border rounded px-3 py-1.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-hive-accent w-56"
           />
           <button

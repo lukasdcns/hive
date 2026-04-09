@@ -45,13 +45,12 @@ export function StreamTile({ stream, onRemove }: Props) {
         ✕
       </button>
 
-      {/* Twitch embed */}
       <iframe
         src={src}
         className="absolute inset-0 w-full h-full"
         allow="autoplay"
         allowFullScreen
-        title={`Twitch: ${stream.channel}`}
+        title={stream.channel}
       />
     </div>
   )

@@ -31,7 +31,7 @@ export function TheaterLayout({ streams, featuredId, onSetFeatured, onRemove }: 
           className="absolute inset-0 w-full h-full"
           allow="autoplay"
           allowFullScreen
-          title={`Twitch: ${featured.channel}`}
+          title={featured.channel}
         />
         <div className="absolute bottom-2 left-2 bg-black/60 text-white text-xs px-2 py-0.5 rounded pointer-events-none select-none">
           {featured.channel}
@@ -65,7 +65,7 @@ export function TheaterLayout({ streams, featuredId, onSetFeatured, onRemove }: 
                   src={miniSrc}
                   className="absolute inset-0 w-full h-full"
                   allow="autoplay"
-                  title={`Twitch mini: ${stream.channel}`}
+                  title={stream.channel}
                 />
 
                 {/* Bouton "mettre en avant" — visible au hover, en haut à gauche */}

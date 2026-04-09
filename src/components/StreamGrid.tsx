@@ -52,7 +52,7 @@ export function StreamGrid({ streams, onRemove, onReorder }: Props) {
     return (
       <div className="flex-1 flex flex-col items-center justify-center text-gray-500">
         <p className="text-lg mb-1">Aucun stream actif</p>
-        <p className="text-sm">Ajoute un channel Twitch pour commencer</p>
+        <p className="text-sm">Ajoute un channel pour commencer</p>
       </div>
     )
   }

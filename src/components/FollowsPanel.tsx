@@ -45,7 +45,7 @@ export function FollowsPanel({ activeChannels, onAdd, token, user, onLogin, onLo
             onClick={onLogin}
             className="w-full bg-hive-accent hover:bg-hive-accent-hover text-hive-bg text-xs font-medium py-1.5 px-2 rounded transition-colors"
           >
-            Se connecter avec Twitch
+            Se connecter
           </button>
         )}
       </div>
