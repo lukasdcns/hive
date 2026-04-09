@@ -6,14 +6,15 @@ export default {
     extend: {
       colors: {
         hive: {
-          bg: '#12100e',
-          surface: '#1a1712',
-          input: '#211e19',
-          hover: '#2d2822',
-          border: '#3d3830',
-          accent: '#f5a623',
-          'accent-hover': '#d4861a',
-          text: '#f0ebe3',
+          bg: '#121113',
+          surface: '#222725',
+          input: '#1a1d1a',
+          hover: '#2d312e',
+          border: '#3a3f3b',
+          accent: '#899878',
+          'accent-hover': '#6b7a5e',
+          text: '#f7f7f2',
+          muted: '#e4e6c3',
         },
       },
     },

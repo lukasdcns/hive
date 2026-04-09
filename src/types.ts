@@ -3,6 +3,12 @@ export interface Stream {
   channel: string
 }
 
+export interface Folder {
+  id: string
+  name: string
+  channels: string[]
+}
+
 export type YoutubeKind = 'video' | 'playlist'
 
 export interface YoutubeVideo {

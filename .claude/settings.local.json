@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create:*)",
+      "Bash(printf 'y\\\\n')",
+      "Bash(npx create-vite@latest . --template react-ts)",
+      "Bash(npx create-vite@latest . --template react-ts --force)",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Bash(curl -s http://localhost:5173)",
+      "Bash(chmod +x:*)",
+      "Bash(npx tsc:*)",
+      "Bash(git init:*)",
+      "Bash(git remote:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(gh auth:*)",
+      "Bash(grep -h \"bg-\\\\|text-\\\\|border-\\\\|ring-\" /home/lukasdcns/multwitch/src/App.tsx /home/lukasdcns/multwitch/src/components/*.tsx)"
+    ]
+  }
+}

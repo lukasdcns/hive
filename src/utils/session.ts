@@ -7,6 +7,7 @@ export interface SessionData {
   youtubeVideos: YoutubeVideo[]
   layout: 'grid' | 'theater'
   featuredId: string | null
+  activeFolderId: string | null
   savedAt: number
 }
 

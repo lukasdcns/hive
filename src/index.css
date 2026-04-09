@@ -10,6 +10,25 @@ html, body, #root {
   height: 100%;
   margin: 0;
   padding: 0;
-  background: #12100e;
-  color: #f0ebe3;
+  background: #121113;
+  color: #f7f7f2;
+}
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3a3f3b;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #899878;
 }

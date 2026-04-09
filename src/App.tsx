@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
-import type { Stream, YoutubeVideo } from './types'
+import type { Stream, YoutubeVideo, Folder } from './types'
 import { useTwitchAuth } from './hooks/useTwitchAuth'
 import { saveSession, loadSession, clearSession } from './utils/session'
 import type { SessionData } from './utils/session'
+import { saveFolders, loadFolders } from './utils/folders'
 import { AddStreamForm } from './components/AddStreamForm'
 import { StreamGrid } from './components/StreamGrid'
 import { TheaterLayout } from './components/TheaterLayout'
@@ -22,11 +23,13 @@ export default function App() {
   const [activeChatChannel, setActiveChatChannel] = useState<string | null>(null)
   const [layout, setLayout] = useState<'grid' | 'theater'>('grid')
   const [featuredId, setFeaturedId] = useState<string | null>(null)
+  const [folders, setFolders] = useState<Folder[]>(() => loadFolders())
+  const [activeFolderId, setActiveFolderId] = useState<string | null>(null)
 
   // Sauvegarde automatique à chaque changement significatif
   useEffect(() => {
     if (streams.length === 0 && youtubeVideos.length === 0) return
-    saveSession({ streams, youtubeVideos, layout, featuredId, savedAt: Date.now() })
+    saveSession({ streams, youtubeVideos, layout, featuredId, activeFolderId, savedAt: Date.now() })
   }, [streams, youtubeVideos, layout, featuredId])
 
   function handleRestore() {
@@ -46,6 +49,7 @@ export default function App() {
       setFeaturedId(oldIdx >= 0 ? freshStreams[oldIdx].id : freshStreams[0]?.id ?? null)
     }
     setActiveChatChannel(freshStreams[0]?.channel ?? null)
+    setActiveFolderId(s.activeFolderId ?? null)
     setPendingSession(null)
   }
 
@@ -71,7 +75,7 @@ export default function App() {
     if (activeChatChannel === null) setActiveChatChannel(channel)
   }
 
-  function handleRemove(id: string) {
+function handleRemove(id: string) {
     setStreams((prev) => {
       const next = prev.filter((s) => s.id !== id)
       const removed = prev.find((s) => s.id === id)
@@ -87,6 +91,63 @@ export default function App() {
 
   function handleReorder(reordered: Stream[]) {
     setStreams(reordered)
+  }
+
+  function handleTheaterReorder(reordered: Stream[]) {
+    setStreams(reordered)
+    if (activeFolderId) {
+      setFolders((prev) => {
+        const updated = prev.map((f) =>
+          f.id === activeFolderId ? { ...f, channels: reordered.map((s) => s.channel) } : f
+        )
+        saveFolders(updated)
+        return updated
+      })
+    }
+  }
+
+  function handleLoadFolder(folder: Folder) {
+    const freshStreams = folder.channels.map((ch, i) => ({ id: String(nextId + i), channel: ch }))
+    nextId += folder.channels.length
+    setStreams(freshStreams)
+    setYoutubeVideos([])
+    setLayout('theater')
+    setFeaturedId(freshStreams[0]?.id ?? null)
+    setActiveChatChannel(freshStreams[0]?.channel ?? null)
+    setActiveFolderId(folder.id)
+  }
+
+  function handleSaveFolder(name: string) {
+    const folder: Folder = {
+      id: String(Date.now()),
+      name,
+      channels: streams.map((s) => s.channel),
+    }
+    setFolders((prev) => {
+      const updated = [...prev, folder]
+      saveFolders(updated)
+      return updated
+    })
+    setActiveFolderId(folder.id)
+  }
+
+  function handleUpdateFolder(id: string) {
+    setFolders((prev) => {
+      const updated = prev.map((f) =>
+        f.id === id ? { ...f, channels: streams.map((s) => s.channel) } : f
+      )
+      saveFolders(updated)
+      return updated
+    })
+    setActiveFolderId(null)
+  }
+
+  function handleDeleteFolder(id: string) {
+    setFolders((prev) => {
+      const updated = prev.filter((f) => f.id !== id)
+      saveFolders(updated)
+      return updated
+    })
   }
 
   function handleSwitchToTheater() {
@@ -133,6 +194,7 @@ export default function App() {
         <AddStreamForm
           existingChannels={streams.map((s) => s.channel)}
           existingYoutubeLabels={youtubeVideos.map((v) => v.label)}
+          token={token}
           onAdd={handleAdd}
           onAddYoutube={handleAddYoutube}
         />
@@ -159,6 +221,12 @@ export default function App() {
           user={user}
           onLogin={login}
           onLogout={logout}
+          folders={folders}
+          activeFolderId={activeFolderId}
+          onLoadFolder={handleLoadFolder}
+          onSaveFolder={handleSaveFolder}
+          onUpdateFolder={handleUpdateFolder}
+          onDeleteFolder={handleDeleteFolder}
         />
 
         <div className="flex-1 overflow-hidden flex flex-col">
@@ -172,6 +240,7 @@ export default function App() {
                 featuredId={featuredId ?? streams[0].id}
                 onSetFeatured={setFeaturedId}
                 onRemove={handleRemove}
+                onReorder={handleTheaterReorder}
               />
             ) : (
               <StreamGrid
@@ -196,6 +265,11 @@ export default function App() {
       {pendingSession && (
         <RestoreSessionModal
           session={pendingSession}
+          activeFolderName={
+            pendingSession.activeFolderId
+              ? (folders.find((f) => f.id === pendingSession.activeFolderId)?.name ?? null)
+              : null
+          }
           onRestore={handleRestore}
           onDismiss={handleDismiss}
         />

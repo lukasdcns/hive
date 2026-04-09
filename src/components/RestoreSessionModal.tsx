@@ -3,11 +3,12 @@ import { relativeTime } from '../utils/session'
 
 interface Props {
   session: SessionData
+  activeFolderName: string | null
   onRestore: () => void
   onDismiss: () => void
 }
 
-export function RestoreSessionModal({ session, onRestore, onDismiss }: Props) {
+export function RestoreSessionModal({ session, activeFolderName, onRestore, onDismiss }: Props) {
   const modeLabel = session.layout === 'theater' ? 'Théâtre' : 'Grille'
   const channelList = session.streams.map((s) => s.channel)
   const ytCount = session.youtubeVideos?.length ?? 0
@@ -43,6 +44,12 @@ export function RestoreSessionModal({ session, onRestore, onDismiss }: Props) {
             {channelList.length} stream{channelList.length > 1 ? 's' : ''}
             {ytCount > 0 ? ` · ${ytCount} vidéo${ytCount > 1 ? 's' : ''} YouTube` : ''}
             {' '}· Mode {modeLabel}
+            {activeFolderName && (
+              <> · <span className="text-hive-accent">
+                <svg width="9" height="9" viewBox="0 0 12 12" fill="currentColor" className="inline mr-0.5 opacity-80"><rect x="0" y="0" width="5" height="5" rx="1"/><rect x="7" y="0" width="5" height="5" rx="1"/><rect x="0" y="7" width="5" height="5" rx="1"/><rect x="7" y="7" width="5" height="5" rx="1"/></svg>
+                {activeFolderName}
+              </span></>
+            )}
           </p>
         </div>
 
